@@ -28,7 +28,7 @@ class MongoLogger
   rescue => e
     if logger
       logger.error "MongoLogger Error: #{e.message}"
-      e.backtrace.each { |line| logger.error(line) }
+      e.backtrace.each { |line| logger.debug(line) }
     end
 
     nil
