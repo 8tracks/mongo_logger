@@ -1,11 +1,13 @@
 require "mongo"
 require "bson"
 require "mongo_logger/version"
+require "timeout"
 
 class MongoLogger
 
   COLLECTION_CAP = 2_000
   COLLECTION_SIZE_BYTES = 20_000_000
+  MONGO_TIMEOUT = 0.25
 
   attr_accessor :logger
 
@@ -18,8 +20,10 @@ class MongoLogger
   end
 
   def log(type, data)
-    collection = get_or_create_collection(type)
-    collection.insert(data)
+    Timeout.timeout(MONGO_TIMEOUT) do
+      collection = get_or_create_collection(type)
+      collection.insert(data)
+    end
 
   rescue => e
     if logger
