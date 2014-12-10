@@ -24,4 +24,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "mongo", "~> 1.7.0"
   s.add_runtime_dependency "bson", "~> 1.7.0"
   s.add_runtime_dependency "bson_ext", "~> 1.7.0"
+  s.add_runtime_dependency "rake", ">= 10.1.0"
 end
